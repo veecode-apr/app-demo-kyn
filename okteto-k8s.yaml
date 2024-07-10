@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-demo-kyn 
+spec:
+  selector:
+    matchLabels:
+      app: app-demo-kyn
+  template:
+    metadata:
+      labels:
+        app: app-demo-kyn
+    spec:
+      containers:
+        - image: okteto.dev/java-gradle-app-demo-kyn:1.0.0
+          name: app-demo-kyn
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-demo-kyn
+spec:
+  type: ClusterIP
+  ports:
+    - name: "app-demo-kyn"
+      port: 8080
+  selector:
+    app: app-demo-kyn
+
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-demo-kyn
+  annotations:
+    dev.okteto.com/generate-host: app-demo-kyn
+spec:
+  rules:
+    - http:
+        paths:
+          - backend:
+              service:
+                name: app-demo-kyn
+                port:
+                  number: 8080
+            path: /
+            pathType: ImplementationSpecific

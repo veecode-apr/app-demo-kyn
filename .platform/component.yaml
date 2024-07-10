@@ -1,0 +1,20 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: app-demo-kyn
+  description: "app-demo-kyn"
+  annotations:
+    github.com/project-slug: veecode-apr/app-demo-kyn
+    backstage.io/techdocs-ref: dir:..
+    backstage.io/kubernetes-id: "app-demo-kyn"
+    vault.io/secrets-path: "app-demo-kyn"
+    grafana/dashboard-selector: "app-demo-kyn"
+    grafana/alert-label-selector: "alertname=app-demo-kyn"
+    argocd/proxy-url: '/argocd/api'
+    argocd/app-name: "app-demo-kyn"
+    kong-manager/service-name: veecode-apr.app-demo-kyn-service-0.8080
+    kong-manager/instance: /kong-manager/api
+spec:
+  type: service
+  lifecycle: experimental
+  owner: "group:default/admin"

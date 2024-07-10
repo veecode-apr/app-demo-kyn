@@ -1,0 +1,8 @@
+site_name: "app-demo-kyn"
+site_description: "app-demo-kyn"
+
+nav:
+  - Introduction: index.md
+
+plugins:
+  - techdocs-core
